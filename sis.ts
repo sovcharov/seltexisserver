@@ -168,8 +168,7 @@ app.get('/api/searchinventory/company/:company/search/:search', function(req, re
 
 app.get('/api/searchinventoryforquote/company/:company/search/:search', function(req, res) {
   let search: any = req.params.search;
-  mySqlService.searchInventoryForQuote(search, (items) => {
-    console.log(items);
+  mySqlService.searchInventoryForQuote(myFunctions.addOrRemoveMinusInCatNumber(search), (items) => {
     res.send(items);
   });
 });

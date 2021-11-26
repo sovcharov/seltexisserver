@@ -88,6 +88,16 @@ export class MyFunctions {
     return str;
   }
 
+  public addOrRemoveMinusInCatNumber (part: any) {
+    let regex = /^[A-Za-z0-9]{2,3}[0-9]{4}$/i;
+    let regex2 = /^[A-Za-z0-9]{2,3}\-[0-9]{4}$/i;
+    if (regex.test(part)) {
+      return `n.number like '%${part}%' or n.number like '%${part.slice(0, part.length-4) + '-' + part.slice(part.length-4)}%'`;
+    } else if (regex2.test(part)) {
+      return `n.number like '%${part}%' or n.number like '%${part.replace("-", "")}%'`;
+    } else return `n.number like '%${part}%'`;
+  }
+
   public createComplicatedQueryForQuote (arr) {
     var i,
       str = '',
