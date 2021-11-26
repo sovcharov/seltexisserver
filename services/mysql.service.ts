@@ -449,8 +449,15 @@ export class MySqlService {
     connection.end();
   }
 
-  searchInventoryForQuote(query, callback) {
-    console.log(query);
+  searchInventoryForQuote(search, callback) {
+    let query: string = `
+      SELECT distinct n.inventoryId as id,
+      i.description as iDescription,
+      i.comment as iComment,
+      p.Price as price,
+      p.stock as stock, p.ordered as ordered, p.msk as msk 
+      from inventoryNumbers as n, inventory as i, inventory1s as p 
+      where ((n.number like '%${search}%')) and n.inventoryId = i.id and i.id = p.id`;
     let items: any = [];
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
