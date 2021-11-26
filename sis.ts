@@ -167,13 +167,7 @@ app.get('/api/searchinventory/company/:company/search/:search', function(req, re
 });
 
 app.get('/api/searchinventoryforquote/company/:company/search/:search', function(req, res) {
-  // console.log("here")
   let search: any = req.params.search;
-  // console.log(search);
-
-  // search = search.split(' ');
-  // search = myFunctions.getRidOfEmptyItems(search);
-  // search = myFunctions.createComplicatedQueryForQuote(search);
   mySqlService.searchInventoryForQuote(search, (items) => {
     console.log(items);
     res.send(items);
