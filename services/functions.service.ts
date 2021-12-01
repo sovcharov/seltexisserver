@@ -279,14 +279,11 @@ export class MyFunctions {
   </url>`;
     for (let i = 0; i < data.length; i += 1) {
       finalData += `
-  <url>
-    <loc>${data[i]}</loc>
-    <lastmod>${date}</lastmod>
-  </url>`;
+  <url><loc>${data[i]}</loc></url>`;
     }
     finalData += `
 </urlset>`;
-    callback(finalData);
+    callback(finalData, date);
 
   }
 
