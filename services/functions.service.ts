@@ -287,4 +287,17 @@ export class MyFunctions {
 
   }
 
+  getPriceListQuery () {
+    let query: string = "";//`SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and (i.description like '%cat%' or i.comment like '%cat%' or i.description like '%prodiesel%' or i.comment like '%prodiesel%') and (i.description not like '%core%' and i.comment not like '%core%')`;
+    let data: string[] = ['cat', 'prodiesel', 'komatsu', 'perkins'];
+    let midQuery: string = "";
+    for (let i = 0; i < data.length; i += 1) {
+      if (i !== 0) {
+        midQuery += ` or `
+      }
+      midQuery += `i.description like '%${data[i]}%' or i.comment like '%${data[i]}%'`;
+    }
+    query = `SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and (${midQuery}) and (i.description not like '%core%' and i.comment not like '%core%')`
+    return(query);
+  }
 }
