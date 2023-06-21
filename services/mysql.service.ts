@@ -11,7 +11,7 @@ export class MySqlService {
   }
 
   getCompanyAtLogin(companyName, callback) {
-    let items = [];
+    let items: any = [];
     let error: any = false;
     let query = `SELECT idcompanies as id, name, fullName FROM companies WHERE name = "${companyName}"`;
     // console.log(query);
@@ -40,7 +40,7 @@ export class MySqlService {
   }
 
   getCurrentUser(user, callback) {
-    let items = [];
+    let items: any = [];
     let query = `SELECT users.id as id, usersSecrets.token as token FROM users, usersSecrets WHERE users.id = "${user.id}" and usersSecrets.token = "${user.token}" and users.id = usersSecrets.id`;
     // console.log(query);
 
@@ -66,7 +66,7 @@ export class MySqlService {
 
 
   getUserRights(user, callback) {
-    let items = [];
+    let items: any = [];
     let query = `SELECT companyId, rightId FROM usersRights WHERE userId = "${user.id}"`;
     // console.log(query);
 
@@ -89,7 +89,7 @@ export class MySqlService {
   }
 
   logIn(data, callback) {
-    let items = [];
+    let items: any = [];
     let error: any = false;
     let query = `call getUserRights(${data.companyId}, '${data.email}')`;
     // console.log(query);
@@ -125,7 +125,7 @@ export class MySqlService {
   }
 
   logInUser(data, rights, callback) {
-    let items = [];
+    let items: any = [];
     let token = Math.floor((Math.random() * 10000000) + 1);
     let query = `call logInUser('${data.email}', '${data.password}', ${token})`;
     // console.log(query);
@@ -155,7 +155,7 @@ export class MySqlService {
   }
 
   checkUserLoggedIn(user, email, token, company, callback) {
-    let items = [];
+    let items: any = [];
     let error: any = false;
     let query = `call getUserRights(${company}, '${email}')`;
     // console.log(query);
@@ -191,7 +191,7 @@ export class MySqlService {
   }
 
   checkUserLoggedInNext(user, token, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call checkUserLoggedIn(${user}, ${token})`;
     // console.log(query);
 
@@ -220,7 +220,7 @@ export class MySqlService {
   }
 
   getManufacturers(company, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call getManufacturers(${company})`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -237,7 +237,7 @@ export class MySqlService {
   }
 
   getAllInventory(company, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call getAllInventory(${company})`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -254,7 +254,7 @@ export class MySqlService {
   }
 
   getLast100Inventory(company, callback) {
-    let items = [];
+    let items: any = [];
     let query = `SELECT * FROM seltexru.inventory order by id desc limit 500`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -271,7 +271,7 @@ export class MySqlService {
   }
 
   getInventoryForPermalinks(company, callback) {
-    let items = [];
+    let items: any = [];
     let currentId = 0;
     let query = `call getInventoryForPermalinks(${company})`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -304,7 +304,7 @@ export class MySqlService {
   }
 
   getInventory(company, id, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call getInventory(${company}, ${id})`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -322,7 +322,7 @@ export class MySqlService {
 
   getInventoryNumbers(company, id, callback) {
     // console.log("heyhey")
-    let items = [];
+    let items: any = [];
     let query = `call getInventoryNumbers('${id}')`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -481,7 +481,7 @@ export class MySqlService {
   }
 
   updateInventoryNumber(company, numberId, newNumber, newManufacturer, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call updateInventoryNumber(${numberId},'${newNumber}',${newManufacturer})`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -498,7 +498,7 @@ export class MySqlService {
   }
 
   updateInventoryMainNumber(company, numberId, inventoryId, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call updateInventoryMainNumber(${numberId},${inventoryId})`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -515,7 +515,7 @@ export class MySqlService {
   }
 
   saveInventoryNewNumber(company, partId, newNumber, newManufacturer, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call addInventoryNewNumber(${partId},'${newNumber}',${newManufacturer})`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -532,7 +532,7 @@ export class MySqlService {
   }
 
   deleteInventoryNumber(company, numberId, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call deleteInventoryNumber(${numberId})`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -549,7 +549,7 @@ export class MySqlService {
   }
 
   updateInventoryDescription(company, inventoryId, newDescription, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call updateInventoryDescription(${inventoryId},'${newDescription}')`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -566,7 +566,7 @@ export class MySqlService {
   }
 
   updateInventoryComment(company, inventoryId, newComment, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call updateInventoryComment(${inventoryId},'${newComment}')`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -583,7 +583,7 @@ export class MySqlService {
   }
 
   updateInventoryWeight(company, inventoryId, newWeight, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call updateInventoryWeight(${inventoryId},${newWeight})`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -600,7 +600,7 @@ export class MySqlService {
   }
 
   updateInventoryUrl(company, inventoryId, newUrl, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call updateInventoryUrl(${inventoryId},'${newUrl}')`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -617,7 +617,7 @@ export class MySqlService {
   }
 
   updateManufacturer(company, id, name, fullName, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call updateManufacturer(${id},'${name}','${fullName}')`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -634,7 +634,7 @@ export class MySqlService {
   }
 
   deleteManufacturer(company, id, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call deleteManufacturer(${id})`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -651,7 +651,7 @@ export class MySqlService {
   }
 
   addManufacturer(company, newName, newFullName, callback) {
-    let items = [];
+    let items: any = [];
     let query = `call addManufacturer('${newName}','${newFullName}')`;
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -696,7 +696,7 @@ export class MySqlService {
   // }
 
   getPriceListData(company, callback) {
-    let items = [];
+    let items: any = [];
     let query = myFunctions.getPriceListQuery();//`SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and (i.description like '%cat%' or i.comment like '%cat%' or i.description like '%prodiesel%' or i.comment like '%prodiesel%') and (i.description not like '%core%' and i.comment not like '%core%')`;
     let connection = mysql.createConnection(mySqlConnection);
     connection.query(query, function (error, results, fields) {
@@ -737,7 +737,7 @@ export class MySqlService {
   }
 
   getSiteMapData(company, callback) {
-    let items = [];
+    let items: any = [];
     // let currentId = 0;
     let query = `call getSiteMapData(${company})`;
     let connection = mysql.createConnection(mySqlConnection);
