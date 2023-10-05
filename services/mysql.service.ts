@@ -710,6 +710,7 @@ export class MySqlService {
           items[items.length-1].numbersString = "";
           items[items.length-1].numberMain = "";
           items[items.length-1].manufacturer = "";
+          items[items.length-1].img = `https://www.seltex.ru/img/db/1-${currentId}-${results[i].imgId}`;
 
         }
         if(results[i].main) {

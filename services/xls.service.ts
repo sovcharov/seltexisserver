@@ -23,7 +23,7 @@ export class MyXLService {
     // let worksheet = workbook.addWorksheet('SeltexPrice');
     // let worksheet2 = workbook2.addWorksheet('SeltexPrice');
     let priceUpdatedOnInfo: string = `Updated: ${myFunctions.getDateString()}`;
-    let xlData = [["id","name","manufacturer", "main number", "all numbers", "price", "stock msk", "stock spb", "transit", priceUpdatedOnInfo]];
+    let xlData = [["id","name","manufacturer", "main number", "all numbers", "price", "stock msk", "stock spb", "transit", "picref", priceUpdatedOnInfo]];
 
     for (let i: number = 0; i < data.length; i += 1) {
       if (data[i].stock > 12) {
@@ -44,7 +44,7 @@ export class MyXLService {
         data[i].ordered = `${data[i].ordered}`;
       }
 
-      xlData[xlData.length] = [data[i].id,`${data[i].description} ${data[i].comment}`,`${data[i].manufacturer}`, `${data[i].numberMain}`, `${data[i].numbersString}`, data[i].price, `${data[i].msk}`, `${data[i].stock}`, `${data[i].ordered}`];
+      xlData[xlData.length] = [data[i].id,`${data[i].description} ${data[i].comment}`,`${data[i].manufacturer}`, `${data[i].numberMain}`, `${data[i].numbersString}`, data[i].price, `${data[i].msk}`, `${data[i].stock}`, `${data[i].ordered}`, `${data[i].img}`];
 
     }
 
