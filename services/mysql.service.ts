@@ -703,7 +703,6 @@ export class MySqlService {
       let currentId: number = 0;
       for (let i: number = 0; i < results.length; i += 1) {
         if (currentId !== results[i].id) {
-
           currentId = results[i].id;
           items[items.length] = results[i];
           items[items.length-1].numbers = [];

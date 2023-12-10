@@ -297,8 +297,8 @@ export class MyFunctions {
       }
       midQuery += `i.description like '%${data[i]}%' or i.comment like '%${data[i]}%'`;
     }
-    // query = `SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and (${midQuery}) and (i.description not like '%core%' and i.comment not like '%core%')`
-    query = `SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main, CASE WHEN EXISTS (SELECT img.id FROM seltexru.inventoryImages as img WHERE i.id = img.inventoryId) THEN 1 ELSE 0 END as imgId FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and i.id = img.inventoryId and (${midQuery}) and (i.description not like '%core%' and i.comment not like '%core%')`
+    query = `SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and (${midQuery}) and (i.description not like '%core%' and i.comment not like '%core%')`
+    // query = `SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main, CASE WHEN EXISTS (SELECT img.id FROM seltexru.inventoryImages as img WHERE i.id = img.inventoryId) THEN 1 ELSE 0 END as imgId FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and i.id = img.inventoryId and (${midQuery}) and (i.description not like '%core%' and i.comment not like '%core%')`
     return(query);
   }
 }
