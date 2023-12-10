@@ -703,13 +703,14 @@ export class MySqlService {
       let currentId: number = 0;
       for (let i: number = 0; i < results.length; i += 1) {
         if (currentId !== results[i].id) {
+
           currentId = results[i].id;
           items[items.length] = results[i];
           items[items.length-1].numbers = [];
           items[items.length-1].numbersString = "";
           items[items.length-1].numberMain = "";
           items[items.length-1].manufacturer = "";
-          items[items.length-1].img = `https://www.seltex.ru/img/db/1-${currentId}-${results[i].imgId}.png`;
+          items[items.length-1].img = "no";//`https://www.seltex.ru/img/db/1-${currentId}-${results[i].imgId}.png`;
 
         }
         if(results[i].main) {
