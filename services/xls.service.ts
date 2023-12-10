@@ -26,20 +26,20 @@ export class MyXLService {
     let xlData = [["id","name","manufacturer", "main number", "all numbers", "price", "stock msk", "stock spb", "transit", "picref", priceUpdatedOnInfo]];
 
     for (let i: number = 0; i < data.length; i += 1) {
-      if (data[i].stock > 12) {
-        data[i].stock = ">12";
+      if (data[i].stock > 48) {
+        data[i].stock = ">48";
       } else {
         data[i].stock = `${data[i].stock}`;
       }
 
-      if (data[i].msk > 12) {
-        data[i].msk = ">12";
+      if (data[i].msk > 48) {
+        data[i].msk = ">48";
       } else {
         data[i].msk = `${data[i].msk}`;
       }
 
-      if (data[i].ordered > 12) {
-        data[i].ordered = ">12";
+      if (data[i].ordered > 48) {
+        data[i].ordered = ">48";
       } else {
         data[i].ordered = `${data[i].ordered}`;
       }
