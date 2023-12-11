@@ -698,6 +698,7 @@ export class MySqlService {
   getPriceListData(company, callback) {
     let items: any = [];
     let query = myFunctions.getPriceListQuery();//`SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and (i.description like '%cat%' or i.comment like '%cat%' or i.description like '%prodiesel%' or i.comment like '%prodiesel%') and (i.description not like '%core%' and i.comment not like '%core%')`;
+    console.log(query);
     let connection = mysql.createConnection(mySqlConnection);
     connection.query(query, function (error, results, fields) {
       let currentId: number = 0;

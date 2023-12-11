@@ -289,16 +289,33 @@ export class MyFunctions {
 
   getPriceListQuery () {
     let query: string = "";//`SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and (i.description like '%cat%' or i.comment like '%cat%' or i.description like '%prodiesel%' or i.comment like '%prodiesel%') and (i.description not like '%core%' and i.comment not like '%core%')`;
-    let data: string[] = ['cat', 'prodiesel', 'komatsu', 'perkins', 'john deere'];
-    let midQuery: string = "";
-    for (let i = 0; i < data.length; i += 1) {
+    let includeOnly: string[] = ['cat', 'prodiesel', 'komatsu', 'perkins', 'john deere'];
+    let exlude: string[] = ['core'];
+    let includeOnlyQuery: string = "";
+    let excludeQuery: string = "";
+    for (let i = 0; i < includeOnly.length; i += 1) {
       if (i !== 0) {
-        midQuery += ` or `
+        includeOnlyQuery += ` or `
       }
-      midQuery += `i.description like '%${data[i]}%' or i.comment like '%${data[i]}%'`;
+      includeOnlyQuery += `i.description like '%${includeOnly[i]}%' or i.comment like '%${includeOnly[i]}%'`;
+    }
+    for (let i = 0; i < exlude.length; i += 1) {
+      if (i !== 0) {
+        excludeQuery += ` or `
+      }
+      excludeQuery += `i.description not like '%${exlude[i]}%' or i.comment not like '%${exlude[i]}%'`;
     }
     // query = `SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and (${midQuery}) and (i.description not like '%core%' and i.comment not like '%core%')`
-    query = `SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and i.id = img.inventoryId and (${midQuery}) and (i.description not like '%core%' and i.comment not like '%core%') left join  inventoryImages AS img on  i.id = img.inventoryId and img.main = 1`
+    query = `
+      SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, 
+      img.id, n.number, n.main, m.fullName as manufacturerFullName
+      FROM seltexru.inventory as i
+      inner join seltexru.inventoryNumbers as n on i.id = n.inventoryId
+      inner join seltexru.inventoryManufacturers as m on n.manufacturerId = m.id
+      left join  seltexru.inventoryImages AS img on  i.id = img.inventoryId and img.main = 1
+      and (${includeOnlyQuery})
+      and (${excludeQuery})
+    `
     return(query);
   }
 }
