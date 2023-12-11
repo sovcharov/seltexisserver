@@ -308,7 +308,7 @@ export class MyFunctions {
     // query = `SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and (${midQuery}) and (i.description not like '%core%' and i.comment not like '%core%')`
     query = `
       SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, 
-      img.id, n.number, n.main, m.fullName as manufacturerFullName
+      img.id as img, n.number, n.main, m.fullName as manufacturerFullName
       FROM seltexru.inventory as i
       inner join seltexru.inventoryNumbers as n on i.id = n.inventoryId
       and (${includeOnlyQuery})
