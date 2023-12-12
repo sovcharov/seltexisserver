@@ -26,20 +26,32 @@ export class MyXLService {
     let xlData = [["id","name","manufacturer", "main number", "all numbers", "price", "stock msk", "stock spb", "transit", "picref", priceUpdatedOnInfo]];
 
     for (let i: number = 0; i < data.length; i += 1) {
-      if (data[i].stock > 48) {
-        data[i].stock = ">48";
+      if (data[i].stock > 24) {
+        if(data[i].description.indexOf("Сухарь")===0) {
+          if (data[i].stock > 48) {
+            data[i].stock = "48";
+          } data[i].stock = `${data[i].stock}`;
+        } else data[i].stock = "24";
       } else {
         data[i].stock = `${data[i].stock}`;
       }
 
-      if (data[i].msk > 48) {
-        data[i].msk = ">48";
+      if (data[i].msk > 24) {
+        if(data[i].description.indexOf("Сухарь")===0) {
+          if (data[i].msk > 48) {
+            data[i].msk = "48";
+          } data[i].msk = `${data[i].msk}`;
+        } else data[i].msk = "24";
       } else {
         data[i].msk = `${data[i].msk}`;
       }
 
-      if (data[i].ordered > 48) {
-        data[i].ordered = ">48";
+      if (data[i].ordered > 24) {
+        if(data[i].description.indexOf("Сухарь")===0) {
+          if (data[i].ordered > 48) {
+            data[i].ordered = "48";
+          } data[i].ordered = `${data[i].ordered}`;
+        } else data[i].ordered = "24";
       } else {
         data[i].ordered = `${data[i].ordered}`;
       }
