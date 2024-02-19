@@ -306,6 +306,7 @@ export class MyFunctions {
       excludeQuery += `i.description not like '%${exlude[i]}%' and i.comment not like '%${exlude[i]}%'`;
     }
     // query = `SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and (${midQuery}) and (i.description not like '%core%' and i.comment not like '%core%')`
+    /*
     query = `
       SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, 
       img.id as imgId, n.number, n.main, m.fullName as manufacturerFullName
@@ -316,6 +317,17 @@ export class MyFunctions {
       inner join seltexru.inventoryManufacturers as m on n.manufacturerId = m.id
       left join  seltexru.inventoryImages AS img on  i.id = img.inventoryId and img.main = 1
     `
+    */
+    query = `
+    SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, 
+    img.id as imgId, n.number, n.main, m.fullName as manufacturerFullName
+    FROM seltexru.inventory as i
+    inner join seltexru.inventoryNumbers as n on i.id = n.inventoryId
+    and ${excludeQuery}
+    and (i.stock > 0 or i.ordered > 0 or i.msk > 0)
+    inner join seltexru.inventoryManufacturers as m on n.manufacturerId = m.id
+    left join  seltexru.inventoryImages AS img on  i.id = img.inventoryId and img.main = 1
+  `
     return(query);
   }
 }
