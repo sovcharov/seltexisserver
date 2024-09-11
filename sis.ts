@@ -26,13 +26,13 @@ import { isArray } from 'util';
 ////////// http/https secure or not block
 if (!myNodeConfig.secure) {
   const server = http.createServer(app);
-  server.listen(myNodeConfig.serverPort, () => { });
+  server.listen(myNodeConfig.serverPort, () => { console.log("runs on HTTP " + myNodeConfig.serverPort)});
 } else {
   let privateKey = fs.readFileSync(`/etc/letsencrypt/live/seltex.ru/privkey.pem`);
   let certificate = fs.readFileSync(`/etc/letsencrypt/live/seltex.ru/fullchain.pem`);
   let credentials = {key: privateKey, cert: certificate};
   const server = https.createServer(credentials, app);
-  server.listen(myNodeConfig.serverPort, () => { });
+  server.listen(myNodeConfig.serverPort, () => { console.log("runs on HTTPS " + myNodeConfig.serverPort) });
 }
 //////////////////////////////////////////////
 
@@ -404,9 +404,9 @@ app.get('/api/createsitemap', function(req, res) {
 //   console.log(req);
 // });
 //
-// app.get('/api/temp', function(req, res) {
-//   console.log('tempFunc')
-// });
+app.get('/api/temp', function(req, res) {
+  console.log('Temp WORKS!!!')
+});
 //
 // import { TempService } from './temp/temp.service';
 // const tempService = new TempService();

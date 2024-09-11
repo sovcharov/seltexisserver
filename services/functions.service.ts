@@ -318,16 +318,27 @@ export class MyFunctions {
       left join  seltexru.inventoryImages AS img on  i.id = img.inventoryId and img.main = 1
     `
     */
+   // FOLLOWING QUERY IS WITH STOCK > 0
+  //   query = `
+  //   SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, 
+  //   img.id as imgId, n.number, n.main, m.fullName as manufacturerFullName
+  //   FROM seltexru.inventory as i
+  //   inner join seltexru.inventoryNumbers as n on i.id = n.inventoryId
+  //   and ${excludeQuery}
+  //   and (i.stock > 0 or i.ordered > 0 or i.msk > 0)
+  //   inner join seltexru.inventoryManufacturers as m on n.manufacturerId = m.id
+  //   left join  seltexru.inventoryImages AS img on  i.id = img.inventoryId and img.main = 1
+  // `
     query = `
     SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, 
     img.id as imgId, n.number, n.main, m.fullName as manufacturerFullName
     FROM seltexru.inventory as i
     inner join seltexru.inventoryNumbers as n on i.id = n.inventoryId
     and ${excludeQuery}
-    and (i.stock > 0 or i.ordered > 0 or i.msk > 0)
     inner join seltexru.inventoryManufacturers as m on n.manufacturerId = m.id
     left join  seltexru.inventoryImages AS img on  i.id = img.inventoryId and img.main = 1
   `
+
     return(query);
   }
 }
