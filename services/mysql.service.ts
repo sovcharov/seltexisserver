@@ -715,6 +715,11 @@ export class MySqlService {
           } else {
             items[items.length-1].img = "no";
           }
+          if (results[i].url) {
+            items[items.length-1].url = `https://www.seltex.ru/cat/${results[i].url}`;
+          } else {
+            items[items.length-1].url = "no";
+          }
 
         }
         if(results[i].main) {
