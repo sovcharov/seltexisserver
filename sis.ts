@@ -1,5 +1,5 @@
 ///<reference path="./node_modules/@types/node/index.d.ts"/>
-import * as express from 'express';
+import express from 'express';
 import { Application } from 'express';
 import * as fs from 'fs';
 import {MyNodeConfig} from '../seltexisserverconfig/mynodeconfig';
