@@ -52,7 +52,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/api/company/exists/:company', function(req, res) {
-  mySqlService.getCompanyAtLogin(req.params.company, (items, error) => {
+  mySqlService.getCompanyAtLogin(req.params.company, (items: any, error: any) => {
     if (error) {
       res.send({ status: 'error', error: error });
     } else {
@@ -89,7 +89,7 @@ app.get('/api/logInUser/:email/:password/:captcha/:companyId', function(req, res
           email: req.params.email,
           password: req.params.password,
           companyId: req.params.companyId
-        }, (items, error) => {
+        }, (items: any, error: any) => {
           if (error) {
             res.send({ status: 'error', error: error });
           } else {
@@ -111,13 +111,13 @@ app.get('/api/logInUser/:email/:password/:captcha/:companyId', function(req, res
 });
 
 app.get('/api/checkCurrentUser/:userId/:token', function(req, res) {
-  mySqlService.getCurrentUser({ id: req.params.userId, token: req.params.token }, (items) => {
+  mySqlService.getCurrentUser({ id: req.params.userId, token: req.params.token }, (items: any) => {
     res.send(items);
   });
 });
 
 app.get('/api/check/userlogged/user/:userID/email/:email/token/:token/company/:company/', function(req, res) {
-  mySqlService.checkUserLoggedIn(req.params.userID, req.params.email, req.params.token, req.params.company, (items, error) => {
+  mySqlService.checkUserLoggedIn(req.params.userID, req.params.email, req.params.token, req.params.company, (items: any, error: any) => {
     if (error) {
       res.send({ status: 'error', error: error });
     } else {
@@ -127,31 +127,31 @@ app.get('/api/check/userlogged/user/:userID/email/:email/token/:token/company/:c
 });
 
 app.get('/api/getmanufacturers/company/:company', function(req, res) {
-  mySqlService.getManufacturers(req.params.company, (items) => {
+  mySqlService.getManufacturers(req.params.company, (items: any) => {
     res.send(items);
   });
 });
 
 app.get('/api/getallinventory/company/:company', function(req, res) {
-  mySqlService.getAllInventory(req.params.company, (items) => {
+  mySqlService.getAllInventory(req.params.company, (items: any) => {
     res.send(items);
   });
 });
 
 app.get('/api/getLast100inventory/company/:company', function(req, res) {
-  mySqlService.getLast100Inventory(req.params.company, (items) => {
+  mySqlService.getLast100Inventory(req.params.company, (items: any) => {
     res.send(items);
   });
 });
 
 app.get('/api/getinventoryforpermalinks/company/:company', function(req, res) {
-  mySqlService.getInventoryForPermalinks(req.params.company, (items) => {
+  mySqlService.getInventoryForPermalinks(req.params.company, (items: any) => {
     res.send(items);
   });
 });
 
 app.get('/api/getinventory/company/:company/id/:id', function(req, res) {
-  mySqlService.getInventory(req.params.company, req.params.id, (items) => {
+  mySqlService.getInventory(req.params.company, req.params.id, (items: any) => {
     res.send(items);
   });
 });
@@ -161,20 +161,20 @@ app.get('/api/searchinventory/company/:company/search/:search', function(req, re
   search = search.split(' ');
   search = myFunctions.getRidOfEmptyItems(search);
   search = myFunctions.createComplicatedQuery(search);
-  mySqlService.searchInventory(search, (items) => {
+  mySqlService.searchInventory(search, (items: any) => {
     res.send(items);
   });
 });
 
 app.get('/api/searchinventoryforquote/company/:company/search/:search', function(req, res) {
   let search: any = req.params.search;
-  mySqlService.searchInventoryForQuote(myFunctions.addOrRemoveMinusInCatNumber(search), (items) => {
+  mySqlService.searchInventoryForQuote(myFunctions.addOrRemoveMinusInCatNumber(search), (items: any) => {
     res.send(items);
   });
 });
 
 app.get('/api/getinventorynumbers/company/:company/id/:id', function(req, res) {
-  mySqlService.getInventoryNumbers(req.params.company, req.params.id, (items) => {
+  mySqlService.getInventoryNumbers(req.params.company, req.params.id, (items: any) => {
     res.send(items);
   });
 });
@@ -183,20 +183,20 @@ app.get('/api/getinventorynumbers/company/:company/id/:id', function(req, res) {
 /// IMAGES APIs
 //////////////////////
 app.get('/api/getinventoryimage/company/:company/id/:id', function(req, res) {
-  myFileService.getInventoryImage(req.params.company, req.params.id, (items) => {
+  myFileService.getInventoryImage(req.params.company, req.params.id, (items: any) => {
     res.send(items);
   });
 });
 
 app.get('/api/getinventoryimages/:company/:id', function(req, res) {
-  mySqlService.getImagesList(req.params.id, images => {
+  mySqlService.getImagesList(req.params.id, (images: any) => {
     if (images.length) {
       let count = 0;
       for (let i = 0; i < images.length; i += 1) {
         // console.log(images[i]);
         let fileName = `${req.params.company}-${req.params.id}-${images[i].id}`;
         // console.log(fileName);
-        myFileService.getInventoryImage(fileName, i, (items, index) => {
+        myFileService.getInventoryImage(fileName, i, (items: any, index: any) => {
           images[index].image = items.image;
           images[index].fileName = fileName;
           count += 1;
@@ -221,7 +221,7 @@ app.get('/api/getinventoryimages/:company/:id', function(req, res) {
 });
 
 app.post('/api/updateimage/company/:company', function(req, res) {
-  myFileService.updateImage(req.params.company, req.body.image, req.body.partId, (items) => {
+  myFileService.updateImage(req.params.company, req.body.image, req.body.partId, (items: any) => {
     res.send(items);
   });
 });
@@ -230,11 +230,11 @@ app.put('/api/savenewimage/company/:company', function(req, res) {
   // console.log(req.body.image);
   // res.send({res: "OK"});
   
-  mySqlService.saveNewImage(req.body.partId, (items) => {
+  mySqlService.saveNewImage(req.body.partId, (items: any) => {
     let fileName = `${req.params.company}-${req.body.partId}-${items.id}`;
     // console.log(fileName);
     // res.send({res: "OK"});
-    myFileService.saveImage(fileName, req.body.image, (fsRes) => {
+    myFileService.saveImage(fileName, req.body.image, (fsRes: any) => {
       if (fsRes.error) {
         res.send(fsRes);
       } else {
@@ -247,7 +247,7 @@ app.put('/api/savenewimage/company/:company', function(req, res) {
 app.delete('/api/deleteimage/:company/:partid/:imageid', function(req, res) {
   let fileName = `${req.params.company}-${req.params.partid}-${req.params.imageid}`;
   let count: number = 0;
-  myFileService.deleteImage(fileName,(response) => {
+  myFileService.deleteImage(fileName,(response: any) => {
       if(response.error) {
         res.send({error: "coul'd not delete file"});
       } else {
@@ -258,7 +258,7 @@ app.delete('/api/deleteimage/:company/:partid/:imageid', function(req, res) {
         }
       }
   });
-  mySqlService.deleteImage(req.params.imageid, (items) => {
+  mySqlService.deleteImage(req.params.imageid, (items: any) => {
     if(count) {
       res.send({result: "okay"});
     } else {
@@ -269,7 +269,7 @@ app.delete('/api/deleteimage/:company/:partid/:imageid', function(req, res) {
 
 app.post('/api/updateinventorymainimage/:company/:partid/:imageid', function(req, res) {
     // res.send({res: "OK"});
-  mySqlService.updateInventoryMainImage(req.params.imageid, req.params.partid, (items) => {
+  mySqlService.updateInventoryMainImage(req.params.imageid, req.params.partid, (items: any) => {
     // console.log(fileName);
     res.send({res: "OK", items:items});
   });
@@ -281,87 +281,87 @@ app.post('/api/updateinventorymainimage/:company/:partid/:imageid', function(req
 
 
 app.put('/api/updateinventorynumber/company/:company/numberid/:numberid/newManufacturer/:newmanufacturer', function(req, res) {
-  mySqlService.updateInventoryNumber(req.params.company, req.params.numberid, req.body.newNumber, req.params.newmanufacturer, (items) => {
+  mySqlService.updateInventoryNumber(req.params.company, req.params.numberid, req.body.newNumber, req.params.newmanufacturer, (items: any) => {
     res.send(items);
   });
 });
 
 app.put('/api/updateinventorymainnumber/company/:company/numberid/:numberid/inventoryid/:inventoryid/', function(req, res) {
-  mySqlService.updateInventoryMainNumber(req.params.company, req.params.numberid, req.params.inventoryid, (items) => {
+  mySqlService.updateInventoryMainNumber(req.params.company, req.params.numberid, req.params.inventoryid, (items: any) => {
     res.send(items);
   });
 });
 
 app.post('/api/saveinventorynewnumber/company/:company/partid/:partid/newManufacturer/:newmanufacturer', function(req, res) {
-  mySqlService.saveInventoryNewNumber(req.params.company, req.params.partid, req.body.newNumber, req.params.newmanufacturer, (items) => {
+  mySqlService.saveInventoryNewNumber(req.params.company, req.params.partid, req.body.newNumber, req.params.newmanufacturer, (items: any) => {
     res.send(items);
   });
 
 });
 
 app.delete('/api/deleteinventorynumber/company/:company/numberid/:numberid', function(req, res) {
-  mySqlService.deleteInventoryNumber(req.params.company, req.params.numberid, (items) => {
+  mySqlService.deleteInventoryNumber(req.params.company, req.params.numberid, (items: any) => {
     res.send(items);
   });
 
 });
 
 app.put('/api/updateinventorydescription/company/:company/inventoryid/:inventoryid', function(req, res) {
-  mySqlService.updateInventoryDescription(req.params.company, req.params.inventoryid, req.body.newDescription, (items) => {
+  mySqlService.updateInventoryDescription(req.params.company, req.params.inventoryid, req.body.newDescription, (items: any) => {
     res.send(items);
   });
 });
 
 app.put('/api/updateinventorycomment/company/:company/inventoryid/:inventoryid', function(req, res) {
-  mySqlService.updateInventoryComment(req.params.company, req.params.inventoryid, req.body.newComment, (items) => {
+  mySqlService.updateInventoryComment(req.params.company, req.params.inventoryid, req.body.newComment, (items: any) => {
     res.send(items);
   });
 });
 
 app.put('/api/updateinventoryweight/company/:company/inventoryid/:inventoryid', function(req, res) {
-  mySqlService.updateInventoryWeight(req.params.company, req.params.inventoryid, req.body.newWeight, (items) => {
+  mySqlService.updateInventoryWeight(req.params.company, req.params.inventoryid, req.body.newWeight, (items: any) => {
     res.send(items);
   });
 });
 
 app.put('/api/updateinventoryurl/company/:company/inventoryid/:inventoryid', function(req, res) {
-  mySqlService.updateInventoryUrl(req.params.company, req.params.inventoryid, req.body.newUrl, (items) => {
+  mySqlService.updateInventoryUrl(req.params.company, req.params.inventoryid, req.body.newUrl, (items: any) => {
     res.send(items);
   });
 });
 
 app.put('/api/updatemanufacturer/company/:company/id/:id', function(req, res) {
-  mySqlService.updateManufacturer(req.params.company, req.params.id, req.body.name, req.body.fullName, (items) => {
+  mySqlService.updateManufacturer(req.params.company, req.params.id, req.body.name, req.body.fullName, (items: any) => {
     res.send(items);
   });
 });
 
 app.delete('/api/deletemanufacturer/company/:company/id/:id', function(req, res) {
-  mySqlService.deleteManufacturer(req.params.company, req.params.id, (items) => {
+  mySqlService.deleteManufacturer(req.params.company, req.params.id, (items: any) => {
     res.send(items);
   });
 
 });
 
 app.post('/api/addmanufacturer/company/:company', function(req, res) {
-  mySqlService.addManufacturer(req.params.company, req.body.name, req.body.fullName, (items) => {
+  mySqlService.addManufacturer(req.params.company, req.body.name, req.body.fullName, (items: any) => {
     res.send(items);
   });
 });
 
 app.post('/api/getrecommendedurlforitem/company/:company/description/:description', function(req, res) {
-  myFunctions.getRecommendedUrlForItem(req.body.inventory, (data) => {
+  myFunctions.getRecommendedUrlForItem(req.body.inventory, (data: any) => {
     res.send({text:data});
   });
 });
 
 app.get('/api/createxlprice', function(req, res) {
-  mySqlService.getPriceListData(req.params.company, (priceListData) => {
-    myXLService.createXLPrice(priceListData, (xlFile)=>{
+  mySqlService.getPriceListData(req.params.company, (priceListData: any) => {
+    myXLService.createXLPrice(priceListData, (xlFile: any)=>{
         myAWSService.uploadPrice(xlFile, ()=>{
-          myXLService.createXLCross(priceListData, (xlFileCross)=>{
+          myXLService.createXLCross(priceListData, (xlFileCross: any)=>{
               myAWSService.uploadCross(xlFileCross, ()=>{
-                myAWSService.getPriceUpdateDate((data)=>{
+                myAWSService.getPriceUpdateDate((data: any)=>{
                   res.send({data: data, res: "OK"});
                 });
               });
@@ -372,21 +372,21 @@ app.get('/api/createxlprice', function(req, res) {
 });
 
 app.get('/api/getpricelistupdatedate', function(req, res) {
-  myAWSService.getPriceUpdateDate((data)=>{
+  myAWSService.getPriceUpdateDate((data: any)=>{
     res.send(data);
   });
 });
 
 app.get('/api/getsitemapupdatedate', function(req, res) {
-  myAWSService.getSiteMapUpdateDate((data)=>{
+  myAWSService.getSiteMapUpdateDate((data: any)=>{
     res.send(data);
   });
 });
 
 app.get('/api/createsitemap', function(req, res) {
   let company = 1;
-  mySqlService.getSiteMapData(company, (priceListData) => {
-    myFunctions.getSiteMapData(priceListData, (data, date)=>{
+  mySqlService.getSiteMapData(company, (priceListData: any) => {
+    myFunctions.getSiteMapData(priceListData, (data: any, date: any)=>{
       // console.log(data);
       myAWSService.uploadSiteMap(data, ()=>{
         res.send({data: date, res: "OK"});
