@@ -1,6 +1,5 @@
 ///<reference path="./node_modules/@types/node/index.d.ts"/>
-import express from 'express';
-import bodyParser from "body-parser";
+import * as express from 'express';
 import { Application } from 'express';
 import * as fs from 'fs';
 import {MyNodeConfig} from '../seltexisserverconfig/mynodeconfig';
@@ -15,8 +14,8 @@ import { MyXLService } from './services/xls.service';
 const myXLService = new MyXLService();
 import {MyAWSService} from './services/aws.service';
 const myAWSService = new MyAWSService();
-const app = express();
-
+const app: Application = express();
+let bodyParser = require('body-parser');
 // import * as request from 'request';
 import * as http from 'http';
 import * as https from 'https';
