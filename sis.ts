@@ -15,7 +15,7 @@ import { MyXLService } from './services/xls.service';
 const myXLService = new MyXLService();
 import {MyAWSService} from './services/aws.service';
 const myAWSService = new MyAWSService();
-const app = express();
+const app: Application = express();
 // import * as request from 'request';
 import * as http from 'http';
 import * as https from 'https';
