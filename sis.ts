@@ -15,7 +15,7 @@ import { MyXLService } from './services/xls.service';
 const myXLService = new MyXLService();
 import {MyAWSService} from './services/aws.service';
 const myAWSService = new MyAWSService();
-const app: Application = express();
+const app = express();
 // import * as request from 'request';
 import * as http from 'http';
 import * as https from 'https';
@@ -356,6 +356,7 @@ app.post('/api/getrecommendedurlforitem/company/:company/description/:descriptio
 });
 
 app.get('/api/createxlprice', function(req, res) {
+  req.params.company = "";
   mySqlService.getPriceListData(req.params.company, (priceListData: any) => {
     myXLService.createXLPrice(priceListData, (xlFile: any)=>{
         myAWSService.uploadPrice(xlFile, ()=>{
