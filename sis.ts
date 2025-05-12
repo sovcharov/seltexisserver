@@ -356,7 +356,6 @@ app.post('/api/getrecommendedurlforitem/company/:company/description/:descriptio
 });
 
 app.get('/api/createxlprice', function(req: any, res) {
-  req.params.company = "";
   mySqlService.getPriceListData(req.params.company, (priceListData: any) => {
     myXLService.createXLPrice(priceListData, (xlFile: any)=>{
         myAWSService.uploadPrice(xlFile, ()=>{
