@@ -1,4 +1,4 @@
-import * as mysql from 'mysql';
+import * as mysql from 'mysql2';
 import { MySqlConnection } from '../../seltexisserverconfig/dbconnectmysqlnode';
 import { MyFunctions } from './functions.service';
 const myFunctions = new MyFunctions();
@@ -102,7 +102,7 @@ export class MySqlService {
         error = err;
         // console.log(query, err);
       })
-      .on('result', (row) => {
+      .on('result', (row: any) => {
         items[items.length] = row.rightId;
 
       })
@@ -169,7 +169,7 @@ export class MySqlService {
         // console.log(query, err);
 
       })
-      .on('result', (row) => {
+      .on('result', (row: any) => {
         items[items.length] = row.rightId;
       })
       .on('end', () => {
@@ -277,7 +277,7 @@ export class MySqlService {
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
     request
-      .on('result', (row) => {
+      .on('result', (row: any) => {
         if (currentId !== row.id) {
           currentId = row.id;
           row.description = {
@@ -699,7 +699,7 @@ export class MySqlService {
     let items: any = [];
     let query = myFunctions.getPriceListQuery();//`SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and (i.description like '%cat%' or i.comment like '%cat%' or i.description like '%prodiesel%' or i.comment like '%prodiesel%') and (i.description not like '%core%' and i.comment not like '%core%')`;
     let connection = mysql.createConnection(mySqlConnection);
-    connection.query(query, function (error, results, fields) {
+    connection.query(query, function (error, results: any, fields) {
       let currentId: number = 0;
       for (let i: number = 0; i < results.length; i += 1) {
         if (currentId !== results[i].id) {
@@ -756,7 +756,7 @@ export class MySqlService {
       .on('error', (err)=>{
         console.log(err);
       })
-      .on('result', (row) => {
+      .on('result', (row: any) => {
         row.url = `https://www.seltex.ru/cat/${row.url}`;
         items[items.length] = row.url;
       })
