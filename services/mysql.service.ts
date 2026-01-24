@@ -1,6 +1,6 @@
 import * as mysql from 'mysql2';
-import { MySqlConnection } from '../../seltexisserverconfig/dbconnectmysqlnode';
-import { MyFunctions } from './functions.service';
+import { MySqlConnection } from '../../seltexisserverconfig/dbconnectmysqlnode.ts';
+import { MyFunctions } from './functions.service.ts';
 const myFunctions = new MyFunctions();
 let mySqlConnection = new MySqlConnection();
 
@@ -10,7 +10,7 @@ export class MySqlService {
 
   }
 
-  getCompanyAtLogin(companyName, callback) {
+  getCompanyAtLogin(companyName: any, callback: any) {
     let items: any = [];
     let error: any = false;
     let query = `SELECT idcompanies as id, name, fullName FROM companies WHERE name = "${companyName}"`;
@@ -39,7 +39,7 @@ export class MySqlService {
     connection.end();
   }
 
-  getCurrentUser(user, callback) {
+  getCurrentUser(user: any, callback: any) {
     let items: any = [];
     let query = `SELECT users.id as id, usersSecrets.token as token FROM users, usersSecrets WHERE users.id = "${user.id}" and usersSecrets.token = "${user.token}" and users.id = usersSecrets.id`;
     // console.log(query);
@@ -65,7 +65,7 @@ export class MySqlService {
   }
 
 
-  getUserRights(user, callback) {
+  getUserRights(user: any, callback: any) {
     let items: any = [];
     let query = `SELECT companyId, rightId FROM usersRights WHERE userId = "${user.id}"`;
     // console.log(query);
@@ -88,7 +88,7 @@ export class MySqlService {
     connection.end();
   }
 
-  logIn(data, callback) {
+  logIn(data: any, callback: any) {
     let items: any = [];
     let error: any = false;
     let query = `call getUserRights(${data.companyId}, '${data.email}')`;
@@ -124,7 +124,7 @@ export class MySqlService {
     connection.end();
   }
 
-  logInUser(data, rights, callback) {
+  logInUser(data: any, rights: any, callback: any) {
     let items: any = [];
     let token = Math.floor((Math.random() * 10000000) + 1);
     let query = `call logInUser('${data.email}', '${data.password}', ${token})`;
@@ -154,7 +154,7 @@ export class MySqlService {
     connection.end();
   }
 
-  checkUserLoggedIn(user, email, token, company, callback) {
+  checkUserLoggedIn(user: any, email: any, token: any, company: any, callback: any) {
     let items: any = [];
     let error: any = false;
     let query = `call getUserRights(${company}, '${email}')`;
@@ -190,7 +190,7 @@ export class MySqlService {
     connection.end();
   }
 
-  checkUserLoggedInNext(user, token, callback) {
+  checkUserLoggedInNext(user: any, token: any, callback: any) {
     let items: any = [];
     let query = `call checkUserLoggedIn(${user}, ${token})`;
     // console.log(query);
@@ -219,7 +219,7 @@ export class MySqlService {
     connection.end();
   }
 
-  getManufacturers(company, callback) {
+  getManufacturers(company: any, callback: any) {
     let items: any = [];
     let query = `call getManufacturers(${company})`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -236,7 +236,7 @@ export class MySqlService {
     connection.end();
   }
 
-  getAllInventory(company, callback) {
+  getAllInventory(company: any, callback: any) {
     let items: any = [];
     let query = `call getAllInventory(${company})`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -253,7 +253,7 @@ export class MySqlService {
     connection.end();
   }
 
-  getLast100Inventory(company, callback) {
+  getLast100Inventory(company: any, callback: any) {
     let items: any = [];
     let query = `SELECT * FROM seltexru.inventory order by id desc limit 500`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -270,7 +270,7 @@ export class MySqlService {
     connection.end();
   }
 
-  getInventoryForPermalinks(company, callback) {
+  getInventoryForPermalinks(company: any, callback: any) {
     let items: any = [];
     let currentId = 0;
     let query = `call getInventoryForPermalinks(${company})`;
@@ -303,7 +303,7 @@ export class MySqlService {
     connection.end();
   }
 
-  getInventory(company, id, callback) {
+  getInventory(company: any, id: any, callback: any) {
     let items: any = [];
     let query = `call getInventory(${company}, ${id})`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -320,7 +320,7 @@ export class MySqlService {
     connection.end();
   }
 
-  getInventoryNumbers(company, id, callback) {
+  getInventoryNumbers(company: any, id: any, callback: any) {
     // console.log("heyhey")
     let items: any = [];
     let query = `call getInventoryNumbers('${id}')`;
@@ -340,7 +340,7 @@ export class MySqlService {
 
   }
 
-  getImagesList(id, callback) {
+  getImagesList(id: any, callback: any) {
     let items: any = [];
     let query: string = `call getImagesList(${id})`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -362,7 +362,7 @@ export class MySqlService {
     connection.end();
   }
 
-  saveNewImage(id, callback) {
+  saveNewImage(id: any, callback: any) {
     let items: any = [];
     let query: string = `call saveNewImage(${id})`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -384,7 +384,7 @@ export class MySqlService {
     connection.end();
   }
 
-  deleteImage(id, callback) {
+  deleteImage(id: any, callback: any) {
     let items: any = [];
     let query: string = `call deleteInventoryImage(${id})`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -407,7 +407,7 @@ export class MySqlService {
     connection.end();
   }
 
-  updateInventoryMainImage(id, partId, callback) {
+  updateInventoryMainImage(id: any, partId: any, callback: any) {
     let items: any = [];
     let query: string = `call updateInventoryMainImage(${id}, ${partId})`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -430,7 +430,7 @@ export class MySqlService {
     connection.end();
   }
 
-  searchInventory(query, callback) {
+  searchInventory(query: any, callback: any) {
     let items: any = [];
     let connection = mysql.createConnection(mySqlConnection);
     let request = connection.query(query);
@@ -451,7 +451,7 @@ export class MySqlService {
     connection.end();
   }
 
-  searchInventoryForQuote(search, callback) {
+  searchInventoryForQuote(search: any, callback: any) {
     let query: string = `
       SELECT distinct n.inventoryId as id,
       i.description as iDescription,
@@ -480,7 +480,7 @@ export class MySqlService {
     connection.end();
   }
 
-  updateInventoryNumber(company, numberId, newNumber, newManufacturer, callback) {
+  updateInventoryNumber(company: any, numberId: any, newNumber: any, newManufacturer: any, callback: any) {
     let items: any = [];
     let query = `call updateInventoryNumber(${numberId},'${newNumber}',${newManufacturer})`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -497,7 +497,7 @@ export class MySqlService {
     connection.end();
   }
 
-  updateInventoryMainNumber(company, numberId, inventoryId, callback) {
+  updateInventoryMainNumber(company: any, numberId: any, inventoryId: any, callback: any) {
     let items: any = [];
     let query = `call updateInventoryMainNumber(${numberId},${inventoryId})`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -514,7 +514,7 @@ export class MySqlService {
     connection.end();
   }
 
-  saveInventoryNewNumber(company, partId, newNumber, newManufacturer, callback) {
+  saveInventoryNewNumber(company: any, partId: any, newNumber: any, newManufacturer: any, callback: any) {
     let items: any = [];
     let query = `call addInventoryNewNumber(${partId},'${newNumber}',${newManufacturer})`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -531,7 +531,7 @@ export class MySqlService {
     connection.end();
   }
 
-  deleteInventoryNumber(company, numberId, callback) {
+  deleteInventoryNumber(company: any, numberId: any, callback: any) {
     let items: any = [];
     let query = `call deleteInventoryNumber(${numberId})`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -548,7 +548,7 @@ export class MySqlService {
     connection.end();
   }
 
-  updateInventoryDescription(company, inventoryId, newDescription, callback) {
+  updateInventoryDescription(company: any, inventoryId: any, newDescription: any, callback: any) {
     let items: any = [];
     let query = `call updateInventoryDescription(${inventoryId},'${newDescription}')`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -565,7 +565,7 @@ export class MySqlService {
     connection.end();
   }
 
-  updateInventoryComment(company, inventoryId, newComment, callback) {
+  updateInventoryComment(company: any, inventoryId: any, newComment: any, callback: any) {
     let items: any = [];
     let query = `call updateInventoryComment(${inventoryId},'${newComment}')`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -582,7 +582,7 @@ export class MySqlService {
     connection.end();
   }
 
-  updateInventoryWeight(company, inventoryId, newWeight, callback) {
+  updateInventoryWeight(company: any, inventoryId: any, newWeight: any, callback: any) {
     let items: any = [];
     let query = `call updateInventoryWeight(${inventoryId},${newWeight})`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -599,7 +599,7 @@ export class MySqlService {
     connection.end();
   }
 
-  updateInventoryUrl(company, inventoryId, newUrl, callback) {
+  updateInventoryUrl(company: any, inventoryId: any, newUrl: any, callback: any) {
     let items: any = [];
     let query = `call updateInventoryUrl(${inventoryId},'${newUrl}')`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -616,7 +616,7 @@ export class MySqlService {
     connection.end();
   }
 
-  updateManufacturer(company, id, name, fullName, callback) {
+  updateManufacturer(company: any, id: any, name: any, fullName: any, callback: any) {
     let items: any = [];
     let query = `call updateManufacturer(${id},'${name}','${fullName}')`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -633,7 +633,7 @@ export class MySqlService {
     connection.end();
   }
 
-  deleteManufacturer(company, id, callback) {
+  deleteManufacturer(company: any, id: any, callback: any) {
     let items: any = [];
     let query = `call deleteManufacturer(${id})`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -650,7 +650,7 @@ export class MySqlService {
     connection.end();
   }
 
-  addManufacturer(company, newName, newFullName, callback) {
+  addManufacturer(company: any, newName: any, newFullName: any, callback: any) {
     let items: any = [];
     let query = `call addManufacturer('${newName}','${newFullName}')`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -695,7 +695,7 @@ export class MySqlService {
   //   connection.end();
   // }
 
-  getPriceListData(company, callback) {
+  getPriceListData(company: any, callback: any) {
     let items: any = [];
     let query = myFunctions.getPriceListQuery();//`SELECT i.id, i.description, i.comment, i.price, i.stock, i.ordered, i.msk, n.number, m.fullName as manufacturerFullName, n.main FROM seltexru.inventory as i, seltexru.inventoryNumbers as n, seltexru.inventoryManufacturers as m where i.id = n.inventoryId and n.manufacturerId = m.id and (i.description like '%cat%' or i.comment like '%cat%' or i.description like '%prodiesel%' or i.comment like '%prodiesel%') and (i.description not like '%core%' and i.comment not like '%core%')`;
     let connection = mysql.createConnection(mySqlConnection);
@@ -746,7 +746,7 @@ export class MySqlService {
     connection.end();
   }
 
-  getSiteMapData(company, callback) {
+  getSiteMapData(company: any, callback: any) {
     let items: any = [];
     // let currentId = 0;
     let query = `call getSiteMapData(${company})`;

@@ -1,5 +1,5 @@
 import * as xl from 'node-xlsx';
-import { MyFunctions } from './functions.service';
+import { MyFunctions } from './functions.service.ts';
 const myFunctions = new MyFunctions();
 // const xl = new XL();
 
@@ -9,7 +9,7 @@ export class MyXLService {
   ) {
   }
 
-  public createXLPrice(data, callback) {
+  public createXLPrice(data: any, callback: any) {
 
     // let workbook = new xl.Workbook();
     // let workbook2 = new xl.Workbook();
@@ -66,7 +66,7 @@ export class MyXLService {
 
   }
 
-  public createXLCross(data, callback) {
+  public createXLCross(data: any, callback: any) {
     let priceUpdatedOnInfo: string = `Updated: ${myFunctions.getDateString()}`;
 
 
