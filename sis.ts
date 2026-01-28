@@ -7,7 +7,7 @@ const app = express();
 import bodyParser from 'body-parser';
 // const fs = require('fs');
 import * as fs from 'fs';
-import { MyNodeConfig } from './config/mynodeconfig.ts';
+import MyNodeConfig from './config/mynodeconfig.ts';
 const myNodeConfig = new MyNodeConfig();
 import { MySqlService } from './services/mysql.service.ts';
 const mySqlService = new MySqlService();
@@ -40,6 +40,7 @@ if (!myNodeConfig.secure) {
 }
 //////////////////////////////////////////////
 
+// app.use(bodyParser.urlencoded({ extended: false },{limit: '5mb'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({limit: '5mb'}));
 
