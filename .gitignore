@@ -38,6 +38,9 @@ temp/
 #node_modules/
 jspm_packages/
 
+#Sergei
+mynodeconfig.ts
+
 # TypeScript v1 declaration files
 typings/
 
