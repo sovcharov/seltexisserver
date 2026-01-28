@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsx sis.ts",
+    "start": "ts-node sis.ts",
     "watch": "sudo nodemon -w . --ext \".ts\" --exec \"npm start\""
   },
   "repository": {
@@ -32,6 +32,7 @@
     "node-xlsx": "^0.12.1",
     "querystring": "^0.2.0",
     "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
     "xlsx": "^0.14.5"
   },
   "devDependencies": {

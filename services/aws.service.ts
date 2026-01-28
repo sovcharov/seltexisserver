@@ -1,4 +1,4 @@
-import {AWSConfig} from '../../seltexisserverconfig/awsconfig';
+import {AWSConfig} from '../../seltexisserverconfig/awsconfig.ts';
 const awsConfig = new AWSConfig();
 const AWS = require('aws-sdk');
 
@@ -16,11 +16,11 @@ export class MyAWSService {
 
   }
 
-  public getPriceUpdateDate(callback) {
+  public getPriceUpdateDate(callback: any) {
     s3.headObject({
       Bucket: 'pricelist.seltex.ru',
       Key: 'SeltexPrice.xlsx'
-    },function (err, data) {
+    },function (err: any, data: any) {
       if (err) {
         callback(err);
       }
@@ -30,13 +30,13 @@ export class MyAWSService {
     });
   }
 
-  public uploadPrice(data, callback) {
+  public uploadPrice(data: any, callback: any) {
     s3.putObject({
       Bucket: 'pricelist.seltex.ru',
       Key: 'SeltexPrice.xlsx',
       Body: data,
       ACL: 'public-read'
-    },function (err, data) {
+    },function (err: any, data: any) {
       if (err) {
         callback(err);
       }
@@ -46,13 +46,13 @@ export class MyAWSService {
     });
   }
 
-  public uploadCross(data, callback) {
+  public uploadCross(data: any, callback: any) {
     s3.putObject({
       Bucket: 'pricelist.seltex.ru',
       Key: 'SeltexCross.xlsx',
       Body: data,
       ACL: 'public-read'
-    },function (err, data) {
+    },function (err: any, data: any) {
       if (err) {
         callback(err);
       }
@@ -62,11 +62,11 @@ export class MyAWSService {
     });
   }
 
-  public getSiteMapUpdateDate(callback) {
+  public getSiteMapUpdateDate(callback: any) {
     s3.headObject({
       Bucket: 'pricelist.seltex.ru',
       Key: 'sitemap.xml'
-    },function (err, data) {
+    },function (err: any, data: any) {
       if (err) {
         callback(err);
       }
@@ -76,13 +76,13 @@ export class MyAWSService {
     });
   }
 
-  public uploadSiteMap(data, callback) {
+  public uploadSiteMap(data: any, callback: any) {
     s3.putObject({
       Bucket: 'pricelist.seltex.ru',
       Key: 'sitemap.xml',
       Body: data,
       ACL: 'public-read'
-    },function (err, data) {
+    },function (err: any, data: any) {
       if (err) {
         callback(err);
       }

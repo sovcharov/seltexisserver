@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { FsConfig } from '../../seltexisserverconfig/fsconfig';
+import { FsConfig } from '../../seltexisserverconfig/fsconfig.ts';
 const fsConfig = new FsConfig();
 
 export class MyFileService {
@@ -8,7 +8,7 @@ export class MyFileService {
 
   }
 
-  public updateImage(company, image, partId, callback) {
+  public updateImage(company: any, image: any, partId: any, callback: any) {
 
     let file = `${__dirname}/${fsConfig.workDir}${company}-${partId}.png`;
     image = image.replace(/^data:;base64,/, "");
@@ -23,7 +23,7 @@ export class MyFileService {
     });
   }
 
-  public saveImage(file, image, callback) {
+  public saveImage(file: any, image: any, callback: any) {
     file = `${__dirname}/${fsConfig.workDir}${file}.png`;
     image = image.replace(/^data:;base64,/, "");
     image = image.replace(/^data:application\/octet-stream;base64,/, "");
@@ -40,7 +40,7 @@ export class MyFileService {
     });
   }
 
-  public deleteImage(file, callback) {
+  public deleteImage(file: any, callback: any) {
     file = `${__dirname}/${fsConfig.workDir}${file}.png`;
     // console.log(file);
     fs.unlink(file, (err) => {
@@ -54,10 +54,10 @@ export class MyFileService {
   }
 
 
-  public getInventoryImage(fileName, index, callback) {
+  public getInventoryImage(fileName: any, index: any, callback: any) {
 
     let file = `${__dirname}/${fsConfig.workDir}${fileName}.png`;
-    let readFile = function (file) {
+    let readFile = function (file: any) {
       fs.readFile(file, (err, data) => {
         if (err) {
           callback({ error: true });

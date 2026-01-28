@@ -15,7 +15,7 @@ import { MyFunctions } from './services/functions.service.ts';
 const myFunctions = new MyFunctions();
 import { MyXLService } from './services/xls.service.ts';
 const myXLService = new MyXLService();
-import {MyAWSService} from './services/aws.service.ts';
+import { MyAWSService } from './services/aws.service.ts';
 const myAWSService = new MyAWSService();
 // const app: Application = express();
 // import * as request from 'request';

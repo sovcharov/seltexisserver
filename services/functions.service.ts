@@ -6,7 +6,7 @@ export class MyFunctions {
 
   }
 
-  public getRidOfEmptyItems (arr) {
+  public getRidOfEmptyItems (arr: any) {
     for (let i = 0; i < arr.length; i += 1) {
       if (!arr[i]) {
         arr.splice(i,1);
@@ -43,14 +43,14 @@ export class MyFunctions {
     return `${date.getFullYear()}-${month}-${day}`;
   }
 
-  public createComplicatedQuery (arr) {
+  public createComplicatedQuery (arr: any) {
     var i,
       str = '',
       catStr = '',
-      getCatPart = function (str) {
+      getCatPart = function (str: any) {
         return str.slice(0, str.length-4) + '-' + str.slice(str.length-4);
       },
-      checkIfCat = function (str) {
+      checkIfCat = function (str: any) {
         var regex = /^[A-Za-z0-9]{2,3}[0-9]{4}$/i;
         if (regex.test(str)) {
           return true;
@@ -98,14 +98,14 @@ export class MyFunctions {
     } else return `n.number like '%${part}%'`;
   }
 
-  public createComplicatedQueryForQuote (arr) {
+  public createComplicatedQueryForQuote (arr: any) {
     var i,
       str = '',
       catStr = '',
-      getCatPart = function (str) {
+      getCatPart = function (str: any) {
         return str.slice(0, str.length-4) + '-' + str.slice(str.length-4);
       },
-      checkIfCat = function (str) {
+      checkIfCat = function (str: any) {
         var regex = /^[A-Za-z0-9]{2,3}[0-9]{4}$/i;
         if (regex.test(str)) {
           return true;
@@ -143,7 +143,7 @@ export class MyFunctions {
     return str;
   }
 
-  public getRecommendedUrlForItem (row, callback) {
+  public getRecommendedUrlForItem (row: any, callback: any) {
     row.descriptionURL = row.description.text.replace(/\-/g,'');
     row.descriptionURL = ctt().transform(row.descriptionURL, "-");
     row.descriptionURL = row.descriptionURL.toLowerCase();
@@ -193,7 +193,7 @@ export class MyFunctions {
     callback(row.url);
   }
 
-  getSiteMapData (data, callback) {
+  getSiteMapData (data: any, callback: any) {
     let date = this.getDateForSiteMap();
     let finalData = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
