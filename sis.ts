@@ -7,7 +7,7 @@ const app = express();
 import bodyParser from 'body-parser';
 // const fs = require('fs');
 import * as fs from 'fs';
-import MyNodeConfig from './config/mynodeconfig.js';
+import { MyNodeConfig } from './config/mynodeconfig.ts';
 const myNodeConfig = new MyNodeConfig();
 import { MySqlService } from './services/mysql.service.ts';
 const mySqlService = new MySqlService();
