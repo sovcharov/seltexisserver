@@ -1,6 +1,6 @@
-import {AWSConfig} from '../../seltexisserverconfig/awsconfig.ts';
+import AWSConfig from './../config/awsconfig.ts';
 const awsConfig = new AWSConfig();
-const AWS = require('aws-sdk');
+import AWS from 'aws-sdk';
 
 AWS.config.update({
     accessKeyId: awsConfig.id,

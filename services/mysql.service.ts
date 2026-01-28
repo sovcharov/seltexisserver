@@ -1,8 +1,8 @@
 import * as mysql from 'mysql2';
-import { MySqlConnection } from '../../seltexisserverconfig/dbconnectmysqlnode.ts';
+import MySqlConnection from "./../config/dbconnectmysqlnode.ts"; //configs - defined in tsconfig.json
 import { MyFunctions } from './functions.service.ts';
 const myFunctions = new MyFunctions();
-let mySqlConnection = new MySqlConnection();
+const mySqlConnection = new MySqlConnection();
 
 export class MySqlService {
 

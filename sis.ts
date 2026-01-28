@@ -1,11 +1,13 @@
 ///<reference path="./node_modules/@types/node/index.d.ts"/>
 // import * as express from 'express';
 // import { Application } from 'express';
-const express = require('express');
+import express from 'express';
 const app = express();
-let bodyParser = require('body-parser');
-const fs = require('fs');
-import { MyNodeConfig } from '../seltexisserverconfig/mynodeconfig.ts';
+// let bodyParser = require('body-parser');
+import bodyParser from 'body-parser';
+// const fs = require('fs');
+import * as fs from 'fs';
+import { MyNodeConfig } from './config/mynodeconfig.ts';
 const myNodeConfig = new MyNodeConfig();
 import { MySqlService } from './services/mysql.service.ts';
 const mySqlService = new MySqlService();
@@ -38,7 +40,7 @@ if (!myNodeConfig.secure) {
 }
 //////////////////////////////////////////////
 
-app.use(bodyParser.urlencoded({ extended: false },{limit: '5mb'}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({limit: '5mb'}));
 
 app.use(function(req: any, res: any, next: any) {

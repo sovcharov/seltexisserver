@@ -1,4 +1,7 @@
-let ctt = require('cyrillic-to-translit-js');
+
+// let ctt = require('cyrillic-to-translit-js');
+import CyrillicToTranslit from 'cyrillic-to-translit-js';
+// const ctt = new CyrillicToTranslit();
 
 export class MyFunctions {
 
@@ -145,7 +148,7 @@ export class MyFunctions {
 
   public getRecommendedUrlForItem (row: any, callback: any) {
     row.descriptionURL = row.description.text.replace(/\-/g,'');
-    row.descriptionURL = ctt().transform(row.descriptionURL, "-");
+    // row.descriptionURL = ctt().transform(row.descriptionURL, "-");
     row.descriptionURL = row.descriptionURL.toLowerCase();
     row.descriptionURL = row.descriptionURL.replace(/r\/k/g,'remkomplekt');
     row.descriptionURL = row.descriptionURL.replace(/\//g,'-');
@@ -156,7 +159,7 @@ export class MyFunctions {
     row.descriptionURL = row.descriptionURL.replace(/\-kt/g,'-komplekt');
 
     row.commentURL = row.comment.text.replace(/\-/g,'');
-    row.commentURL = ctt().transform(row.commentURL, "-");
+    // row.commentURL = ctt().transform(row.commentURL, "-");
     row.commentURL = row.commentURL.replace(/r\/k/g,'remkomplekt');
     row.commentURL = row.commentURL.replace(/\//g,'-');
     row.commentURL = row.commentURL.replace(/\\/g,'-');

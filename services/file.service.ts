@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { FsConfig } from '../../seltexisserverconfig/fsconfig.ts';
+import FsConfig from './../config/fsconfig.ts';
 const fsConfig = new FsConfig();
 
 export class MyFileService {
