@@ -10,7 +10,7 @@
     // See also https://aka.ms/tsconfig/module
     // "module": "node",
     // "module": "CommonJS",
-       "module": "NodeNext",
+    "module": "NodeNext",
     "moduleResolution": "nodenext",
     "esModuleInterop": true,
     // "baseUrl": ".",
