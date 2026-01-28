@@ -1,5 +1,5 @@
 import * as mysql from 'mysql2';
-import MySqlConnection from "config/dbconnectmysqlnode.ts"; //configs - defined in tsconfig.json
+import MySqlConnection from "config/dbconnectmysqlnode.js"; //configs - defined in tsconfig.json
 import { MyFunctions } from './functions.service.ts';
 const myFunctions = new MyFunctions();
 const mySqlConnection = new MySqlConnection();

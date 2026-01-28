@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import FsConfig from 'config/fsconfig.ts';
+import FsConfig from 'config/fsconfig.js';
 const fsConfig = new FsConfig();
 
 export class MyFileService {
