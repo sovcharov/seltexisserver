@@ -12,13 +12,12 @@
     // "module": "CommonJS",
        "module": "NodeNext",
     "moduleResolution": "nodenext",
-    "target": "esnext",
     "esModuleInterop": true,
-    "baseUrl": ".",
-    "paths": {
-      // "src/*": ["src/*"], // This allows imports like 'src/utils'
-      "config/*": ["./config/*"] // Example for shared code in a parent dir (monorepo)
-    },
+    // "baseUrl": ".",
+    // "paths": {
+    //   // "src/*": ["src/*"], // This allows imports like 'src/utils'
+    //   "config/*": ["./config/*"] // Example for shared code in a parent dir (monorepo)
+    // },
 
     // "types": [],
     // For nodejs:
