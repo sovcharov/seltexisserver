@@ -17,7 +17,7 @@
     "baseUrl": ".",
     "paths": {
       // "src/*": ["src/*"], // This allows imports like 'src/utils'
-      "configs/*": ["./config/*"] // Example for shared code in a parent dir (monorepo)
+      "config/*": ["./config/*"] // Example for shared code in a parent dir (monorepo)
     },
 
     // "types": [],

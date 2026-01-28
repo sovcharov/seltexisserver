@@ -1,4 +1,4 @@
-import AWSConfig from 'configs/awsconfig.ts';
+import AWSConfig from 'config/awsconfig.ts';
 const awsConfig = new AWSConfig();
 import AWS from 'aws-sdk';
 
